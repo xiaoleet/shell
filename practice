@@ -1,5 +1,18 @@
 1.编写一个Shell脚本，监控系统的负载情况。如果5分钟内的平均负载超过了1，就发送一封警告邮件给系统管理员。
 
+ #!/bin/bash
+
+ # Get the 5-minute load average
+ load=$(uptime | cut -d',' -f4-6 | cut -d ',' -f2)
+ #load=$(uptime | cut -d ':' -f4|cut -d ' ' -f2)
+ # Check if the load average is greater than 1
+ echo $load | awk -v admin="user@mail.com" '{
+     if ($1 > 1) {
+         # Send an email to the system administrator
+         system("echo \"High load warning: load average is " $1 "\" | mail -s \"High load warning\" " admin)
+     }
+ }'
+
 2.编写一个Shell脚本，实现一个简单的日志分析工具。该工具需要读取一个Web服务器的访问日志，统计并输出访问量最高的10个IP地址。
 
 3.编写一个Shell脚本，定期备份/var/log目录下的所有.log文件到一个指定的备份目录。备份文件需要按照日期进行归档，例如backup_20220101.tar.gz。
