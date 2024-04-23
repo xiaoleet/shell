@@ -1,7 +1,6 @@
 1.编写一个Shell脚本，监控系统的负载情况。如果5分钟内的平均负载超过了1，就发送一封警告邮件给系统管理员。
 
  #!/bin/bash
-
  # Get the 5-minute load average
  load=$(uptime | cut -d',' -f4-6 | cut -d ',' -f2)
  #load=$(uptime | cut -d ':' -f4|cut -d ' ' -f2)
